@@ -2,27 +2,27 @@
 
 int main() {
 	Dict<int, int> d;
-	Dict<int, int>::node* a,* b, *c;
+	Dict<int, int>::node* a, * b, * c;
 	d.insert(1, 2);
 	d.insert(4, 2);
 	d.insert(5, 2);
-	a = d.find(4);
+	//a = d.find(4);
 
-	if (a != d.end()) {
+	/*if (a != d.end()) {
 		b = d.succesor(a);
 		if (b != d.end())
 			std::cout << b->key << '\n';
 		c = d.predecesor(a);
 		if (c != d.end())
 			std::cout << c->key << '\n';
-	}	
+	}
 
 	*d[1] = 10;
 	*d[2] = 20;
 
 	for (Dict<int, int>::iterator it = d.begin(); it != d.end(); it++) {
 		std::cout << it.getKey() << " " << it.getData() << "\n";
-	}
+	}*/
 
 	while (true) {
 		std::cout << "1. insert\n2. clear\n3. build\n4. print\n";

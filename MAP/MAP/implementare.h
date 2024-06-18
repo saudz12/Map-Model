@@ -200,6 +200,7 @@ public:
 			comp = it->comp;
 		}
 
+
 		iterator& operator++(int) {
 			node* _root = nod;
 			while (_root->p != _NIL)
@@ -276,22 +277,62 @@ public:
 	};
 
 	void RSD(node* curr) {
-		std::cout << curr->key << ": " << curr->data << '\n';
+		std::cout << curr->col << ": (" << curr->key << ", " << curr->data << ")\n";
 		if (curr->st != NIL && curr->st != nullptr) RSD(curr->st);
 		if (curr->dr != NIL && curr->dr != nullptr) RSD(curr->dr);
 	}
 	void SRD(node* curr) {
 		if (curr->st != NIL && curr->st != nullptr) SRD(curr->st);
-		std::cout << curr->key << ": " << curr->data << '\n';
+		std::cout << curr->col << ": (" << curr->key << ", " << curr->data << ")\n";
 		if (curr->dr != NIL && curr->dr != nullptr) SRD(curr->dr);
 	}
 	void SDR(node* curr) {
 		if (curr->st != NIL && curr->st != nullptr) RSD(curr->st);
 		if (curr->dr != NIL && curr->dr != nullptr) RSD(curr->dr);
-		std::cout << curr->key << ": " << curr->data << '\n';
+		std::cout << curr->col << ": (" << curr->key << ", " << curr->data << ")\n";
+	}
+	void Nivele() {
+		node* aux = root;
+		int nivel = 0, cur_lvl = 0, nxt_lvl = 0;
+		std::queue<node*> ord;
+		if (aux != nullptr && aux != NIL) {
+			ord.push(aux);
+			std::cout << "Nivel 0: ";
+			cur_lvl++;
+		}
+		while (!ord.empty()) {
+			if (cur_lvl == 0) {
+				cur_lvl = nxt_lvl;
+				nxt_lvl = 0;
+				nivel++;
+				std::cout << "\nNivel " << nivel << ":";
+			}
+
+			aux = ord.front();
+
+			if (aux != nullptr && aux != NIL)
+				std::cout << aux->col << ": (" << aux->key << ", " << aux->data << ") | ";
+
+			if (aux->st != nullptr && aux->st != NIL) {
+				ord.push(aux->st);
+				nxt_lvl++;
+			}
+
+			if (aux->dr != nullptr && aux->dr != NIL) {
+				ord.push(aux->dr);
+				nxt_lvl++;
+			}
+			cur_lvl--;
+
+			ord.pop();
+		}
 	}
 
 	void afisare(int care) {
+		if (root == nullptr || root == NIL) {
+			std::cout << "The tree is empty!\n";
+			return;
+		}
 		switch (care)
 		{
 		case 1: {
@@ -305,6 +346,9 @@ public:
 		case 3: {
 			SDR(root);
 			break;
+		}
+		case 4: {
+			Nivele();
 		}
 		default:
 			break;
@@ -340,8 +384,6 @@ void Dict<K, D, Compare>::rotatieST(node* nod)
 template<class K, class D, class Compare>
 void Dict<K, D, Compare>::rotatieDR(node* nod)
 {
-	if (nod->dr == NIL)
-		return;
 	node* aux = nod->st;
 	nod->st = aux->dr;
 	if (nod != root && nod->p != nullptr) {
@@ -365,7 +407,7 @@ void Dict<K, D, Compare>::balansare(node* nod)
 {
 	node* aux = nod;
 	while (aux->p->col == 'R' && aux->col == 'R') {
-		node* parent = nod->p;
+		node* parent = aux->p;
 		if (parent == nullptr || parent == NIL)
 			break;
 		node* grandp = parent->p;
@@ -388,26 +430,26 @@ void Dict<K, D, Compare>::balansare(node* nod)
 		else {
 			if (aux == parent->dr && parent == grandp->st) {
 				rotatieST(parent);
-				nod = parent;
+				aux = parent;
 				continue;
 			}
 			if (aux == parent->st && parent == grandp->dr) {
 				rotatieDR(parent);
-				nod = parent;
+				aux = parent;
 				continue;
 			}
 			if (aux == parent->st && parent == grandp->st) {
 				grandp->col = 'R';
 				parent->col = 'N';
 				rotatieDR(grandp);
-				nod = parent;
+				aux = parent;
 				continue;
 			}
 			if (aux == parent->dr && parent == grandp->dr) {
 				grandp->col = 'R';
 				parent->col = 'N';
 				rotatieST(grandp);
-				nod = parent;
+				aux = parent;
 				continue;
 			}
 		}

@@ -1,8 +1,7 @@
 ﻿  Source.cpp
+D:\UNIV\SD - Structuri de Date\Map-Model\MAP\MAP\Source.cpp(5,24): warning C4101: 'a': unreferenced local variable
+D:\UNIV\SD - Structuri de Date\Map-Model\MAP\MAP\Source.cpp(5,29): warning C4101: 'b': unreferenced local variable
+D:\UNIV\SD - Structuri de Date\Map-Model\MAP\MAP\Source.cpp(5,34): warning C4101: 'c': unreferenced local variable
   implementare.cpp
   Generating Code...
-D:\UNIV\Structuri de Date\MAP\MAP\implementare.h(89,1): warning C4715: 'Dict<int,int,std::less<int> >::operator[]': not all control paths return a value
-D:\UNIV\Structuri de Date\MAP\MAP\implementare.h(66,1): warning C4172: returning address of local variable or temporary: newN
-D:\UNIV\Structuri de Date\MAP\MAP\implementare.h(72,1): warning C4172: returning address of local variable or temporary: aux
-D:\UNIV\Structuri de Date\MAP\MAP\implementare.h(83,1): warning C4172: returning address of local variable or temporary: newN
-  MAP.vcxproj -> D:\UNIV\Structuri de Date\MAP\x64\Debug\MAP.exe
+  MAP.vcxproj -> D:\UNIV\SD - Structuri de Date\Map-Model\MAP\x64\Debug\MAP.exe
